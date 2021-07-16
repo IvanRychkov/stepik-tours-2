@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from data import title, subtitle, description, departures, tours
 from operator import itemgetter
+import bs4
 
 app = Flask(__name__)
 
@@ -12,6 +13,7 @@ def lower_first(s: str) -> str:
 
 @app.route('/')
 def render_index():
+    # TODO: Максимум 6 туров на главной странице
     return render_template('index.html',
                            title=title,
                            subtitle=subtitle,
@@ -54,6 +56,12 @@ def render_tours(tour_id):
                            title=title,
                            tour=tour,
                            departure_city=departure_city,
+                           departures=departures)
+
+
+@app.errorhandler(404)
+def render_error(error):
+    return render_template('error.html',
                            departures=departures)
 
 
