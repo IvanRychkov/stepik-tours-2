@@ -38,7 +38,6 @@ def render_departure(departure_code):
 
     nights = map(itemgetter('nights'), tours_available.values())
     prices = map(itemgetter('price'), tours_available.values())
-    print(request.path)
     return render_template('departure.html',
                            title=title,
                            departure_code=departure_code,
@@ -69,4 +68,4 @@ def render_error(error):
 
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5050, debug=True, use_reloader=True)
+    app.run()
