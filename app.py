@@ -1,9 +1,6 @@
-import random
-
 from flask import Flask, render_template, request
 from data import title, subtitle, description, departures, tours
 from operator import itemgetter
-from pprint import pp
 
 app = Flask(__name__)
 
