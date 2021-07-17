@@ -1,7 +1,9 @@
+import random
+
 from flask import Flask, render_template, request
 from data import title, subtitle, description, departures, tours
 from operator import itemgetter
-import bs4
+from pprint import pp
 
 app = Flask(__name__)
 
@@ -14,12 +16,13 @@ def lower_first(s: str) -> str:
 @app.route('/')
 def render_index():
     # TODO: Максимум 6 туров на главной странице
+    top_tours = (dict(sorted(tours.items(), key=lambda t: t[1]['stars'], reverse=True)[:6]))
     return render_template('index.html',
                            title=title,
                            subtitle=subtitle,
                            description=description,
                            departures=departures,
-                           tours=tours)
+                           tours=top_tours)
 
 
 @app.route('/departure/<departure_code>/')
